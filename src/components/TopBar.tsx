@@ -7,7 +7,9 @@ import {
   useColorMode,
   Icon
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import Image from 'next/image';
+import Logo from '../public/logo.png';
+import { MoonIcon } from '@chakra-ui/icons';
 import { FaSun } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 
@@ -17,14 +19,28 @@ function TopBar() {
     <Flex as="header" w="full" minH="4rem" shrink={0} justifyContent="center">
       <Flex
         w="6xl"
+        px="6"
         maxWidth="full"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Heading fontSize="2xl" userSelect="none" fontWeight="semibold">
-          Pastebook
-        </Heading>
         <HStack spacing="2.5">
+          <Image src={Logo} alt="logo" width={35} height={35} />
+          <Heading
+            bgClip="text"
+            bgGradient={
+              colorMode === 'light'
+                ? 'linear(to-r, teal.500, blue.500)'
+                : 'linear(to-r, teal.300, blue.300)'
+            }
+            fontSize="2xl"
+            userSelect="none"
+            fontWeight="bold"
+          >
+            Pastebook
+          </Heading>
+        </HStack>
+        <HStack spacing="2">
           <Tooltip mt="4" label="Github">
             <IconButton
               variant="ghost"
