@@ -20,6 +20,10 @@ const semanticTokens = {
     border: {
       default: 'gray.200',
       _dark: 'gray.700'
+    },
+    text: {
+      default: '#213547',
+      _dark: '#ebeced'
     }
   }
 };
@@ -27,7 +31,8 @@ const semanticTokens = {
 const styles: Theme['styles'] = {
   global: {
     'html, body': {
-      backgroundColor: 'bg'
+      backgroundColor: 'bg',
+      color: 'text'
     }
   }
 };
