@@ -8,7 +8,9 @@ import {
   useColorMode,
   chakra,
   Button,
-  useBreakpointValue
+  useBreakpointValue,
+  Box,
+  Container
 } from '@chakra-ui/react';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 import Head from 'next/head';
@@ -65,6 +67,29 @@ const Home: NextPage = () => {
         >
           GET STARTED
         </Button>
+        <Flex direction={{ base: 'column', md: 'row' }} mx="auto" p="4" mt="12">
+          <Container maxW={{ base: '80', md: '96', lg: '80' }} h="40" p="4">
+            <Heading fontSize="lg">Fully Controlled</Heading>
+            <Text>
+              Say goodbye to Chrome Extensions. You decide what to save, and we
+              save them all.
+            </Text>
+          </Container>
+          <Container maxW="80" h="40" p="4">
+            <Heading fontSize="lg">Fully Controlled</Heading>
+            <Text>
+              Say goodbye to Chrome Extensions. You decide what to save, and we
+              save them all.
+            </Text>
+          </Container>
+          <Container maxW="80" h="40" p="4">
+            <Heading fontSize="lg">Fully Controlled</Heading>
+            <Text>
+              Say goodbye to Chrome Extensions. You decide what to save, and we
+              save them all.
+            </Text>
+          </Container>
+        </Flex>
       </Flex>
       <footer></footer>
     </>
