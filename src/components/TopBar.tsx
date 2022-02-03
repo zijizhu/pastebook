@@ -15,11 +15,11 @@ import { FaSun } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 
 function TopBar() {
-  const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex as="header" w="full" minH="4rem" shrink={0} justifyContent="center">
+    <Flex as="header" w="full" minH="16" shrink={0} justifyContent="center">
       <Flex
         w="6xl"
         px="4"
@@ -48,7 +48,7 @@ function TopBar() {
         </HStack>
 
         <HStack spacing="2">
-          <Tooltip mt="4" label="Github">
+          <Tooltip mt="4" label="github">
             <IconButton
               variant="ghost"
               colorScheme="gray"
@@ -59,7 +59,10 @@ function TopBar() {
             />
           </Tooltip>
 
-          <Tooltip mt="4" label={colorMode === 'light' ? 'dark' : 'light'}>
+          <Tooltip
+            mt="4"
+            label={`${colorMode === 'light' ? 'dark' : 'light'} mode`}
+          >
             <IconButton
               p="0"
               variant="ghost"
