@@ -1,14 +1,13 @@
 import { extendTheme, ThemeConfig, Theme } from '@chakra-ui/react';
 
 const config: ThemeConfig = {
-  initialColorMode: 'light',
-  useSystemColorMode: true
+  initialColorMode: 'system'
 };
 
 const fonts: Theme['fonts'] = {
   heading: 'Inter, sans-serif',
-  body: 'IBM Plex Sans, sans-serif',
-  mono: 'IBM Plex Sans, sans-serif'
+  body: 'Inter, sans-serif',
+  mono: 'Inter, sans-serif'
 };
 
 const semanticTokens = {

@@ -7,6 +7,7 @@ import {
   useColorMode,
   Icon
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Logo from '../public/logo.png';
 import { MoonIcon } from '@chakra-ui/icons';
@@ -15,17 +16,22 @@ import { BsGithub } from 'react-icons/bs';
 
 function TopBar() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const router = useRouter();
+
   return (
     <Flex as="header" w="full" minH="4rem" shrink={0} justifyContent="center">
       <Flex
         w="6xl"
-        px="6"
+        px="4"
         maxWidth="full"
         justifyContent="space-between"
         alignItems="center"
       >
         <HStack spacing="2.5">
-          <Image src={Logo} alt="logo" width={35} height={35} />
+          {router.pathname !== '/' && router.pathname !== '/login' && (
+            <Image src={Logo} alt="logo" width={35} height={35} />
+          )}
+
           <Heading
             bgClip="text"
             bgGradient={
@@ -40,6 +46,7 @@ function TopBar() {
             Pastebook
           </Heading>
         </HStack>
+
         <HStack spacing="2">
           <Tooltip mt="4" label="Github">
             <IconButton
@@ -51,10 +58,8 @@ function TopBar() {
               icon={<Icon w={5} h={5} as={BsGithub} />}
             />
           </Tooltip>
-          <Tooltip
-            mt="4"
-            label={`${colorMode === 'light' ? 'dark' : 'light'} mode`}
-          >
+
+          <Tooltip mt="4" label={colorMode === 'light' ? 'dark' : 'light'}>
             <IconButton
               p="0"
               variant="ghost"

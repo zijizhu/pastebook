@@ -1,21 +1,34 @@
 import type { NextPage } from 'next';
-import { Text, Flex, Heading, useColorMode, chakra } from '@chakra-ui/react';
+import Image from 'next/image';
+import Logo from '../public/logo.png';
+import {
+  Text,
+  Flex,
+  Heading,
+  useColorMode,
+  chakra,
+  Button,
+  useBreakpointValue
+} from '@chakra-ui/react';
+import { IoMdArrowRoundForward } from 'react-icons/io';
 import Head from 'next/head';
 
 const Home: NextPage = () => {
   const { colorMode } = useColorMode();
+  const buttonSize = useBreakpointValue({ base: 'md', lg: 'lg' });
 
   return (
     <>
       <Head>
         <title>Pastebook Home</title>
       </Head>
-      <Flex flex={1} w="full" direction="column" alignItems="center">
+      <Flex flex={1} p="8" direction="column" alignItems="center">
+        <Image src={Logo} alt="logo" width={120} height={120} />
         <Heading
+          mt="12"
           userSelect="none"
           textAlign="center"
-          mt="12"
-          fontSize={['4xl', '5xl', '6xl']}
+          fontSize={['3xl', '4xl', '5xl', '6xl']}
           fontWeight="black"
           bgClip={colorMode === 'dark' ? 'text' : 'border-box'}
           bgGradient={
@@ -35,6 +48,23 @@ const Home: NextPage = () => {
           </chakra.span>
           <br /> Clipboard Manager
         </Heading>
+        <Text
+          textAlign="center"
+          fontSize={['lg', 'xl', '2xl']}
+          mt="6"
+          fontWeight="medium"
+        >
+          Save all your clipboard content on the cloud. Get them back at
+          anytime.
+        </Text>
+        <Button
+          size={buttonSize}
+          rightIcon={<IoMdArrowRoundForward />}
+          colorScheme="teal"
+          mt={['6', '8', '12']}
+        >
+          GET STARTED
+        </Button>
       </Flex>
       <footer></footer>
     </>
