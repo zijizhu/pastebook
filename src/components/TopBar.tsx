@@ -1,18 +1,20 @@
 import {
+  Icon,
   Flex,
+  chakra,
   HStack,
-  Heading,
-  IconButton,
   Tooltip,
-  useColorMode,
-  Icon
+  IconButton,
+  useColorMode
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../public/logo.png';
-import { MoonIcon } from '@chakra-ui/icons';
 import { FaSun } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import { BsGithub } from 'react-icons/bs';
+import { MoonIcon } from '@chakra-ui/icons';
+
+import Logo from '../public/logo.png';
 
 function TopBar() {
   const router = useRouter();
@@ -32,19 +34,21 @@ function TopBar() {
             <Image src={Logo} alt="logo" width={35} height={35} />
           )}
 
-          <Heading
-            bgClip="text"
-            bgGradient={
-              colorMode === 'light'
-                ? 'linear(to-r, teal.500, blue.500)'
-                : 'linear(to-r, teal.300, blue.300)'
-            }
-            fontSize="2xl"
-            userSelect="none"
-            fontWeight="bold"
-          >
-            Pastebook
-          </Heading>
+          <Link href="/" passHref>
+            <chakra.a
+              bgClip="text"
+              bgGradient={
+                colorMode === 'light'
+                  ? 'linear(to-r, teal.500, blue.500)'
+                  : 'linear(to-r, teal.300, blue.300)'
+              }
+              fontSize="2xl"
+              userSelect="none"
+              fontWeight="bold"
+            >
+              Pastebook
+            </chakra.a>
+          </Link>
         </HStack>
 
         <HStack spacing="2">

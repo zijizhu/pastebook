@@ -1,6 +1,3 @@
-import type { NextPage } from 'next';
-import Image from 'next/image';
-import Logo from '../public/logo.png';
 import {
   Text,
   Flex,
@@ -10,11 +7,15 @@ import {
   Button,
   useBreakpointValue,
   Box,
-  Container
+  SimpleGrid
 } from '@chakra-ui/react';
+import Head from 'next/head';
+import Image from 'next/image';
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { IoMdArrowRoundForward } from 'react-icons/io';
-import Head from 'next/head';
+
+import Logo from '../public/logo.png';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -26,11 +27,17 @@ const Home: NextPage = () => {
       <Head>
         <title>Pastebook Home</title>
       </Head>
-      <Flex flex={1} p="8" direction="column" alignItems="center">
+      <Flex
+        flex={1}
+        px="8"
+        pt={['12', '16', '20']}
+        direction="column"
+        alignItems="center"
+      >
         <Image src={Logo} alt="logo" width={120} height={120} />
 
         <Heading
-          mt="12"
+          mt="16"
           userSelect="none"
           textAlign="center"
           fontSize={['3xl', '4xl', '5xl', '6xl']}
@@ -56,7 +63,7 @@ const Home: NextPage = () => {
         <Text
           textAlign="center"
           fontSize={['lg', 'xl', '2xl']}
-          mt="6"
+          mt={['6', '8', '12']}
           fontWeight="medium"
         >
           Save all your clipboard content on the cloud. Get them back at
@@ -73,42 +80,61 @@ const Home: NextPage = () => {
           GET STARTED
         </Button>
 
-        <Flex
-          as="section"
-          direction={{ base: 'column', md: 'row' }}
-          mx="auto"
-          p="4"
-          mt="12"
-        >
-          <Container maxW={{ base: 'full', lg: '80' }} h="40" p="4">
+        <SimpleGrid columns={[1, 1, 2, 3]} mt="20">
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
             <Heading fontSize="lg" mb="4">
-              Fully Controlled
+              Fully Controlled 🔨
             </Heading>
             <Text fontWeight="medium">
-              Say goodbye to Loggers and Chrome Extensions. You decide what to
-              save, and we save them all.
+              Say goodbye to Chrome Extensions. You decide what to save, and we
+              save them all.
             </Text>
-          </Container>
-          <Container maxW={{ base: 'full', lg: '80' }} h="40" p="4">
+          </Box>
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
             <Heading fontSize="lg" mb="4">
-              Web based
+              Cloud based 💻
             </Heading>
             <Text fontWeight="medium">
-              Say goodbye to mobile and desktop apps. You don’t need to install
-              and update anymore.
+              Say goodbye to mobile and desktop apps. You no longer need to
+              install and update anymore.
             </Text>
-          </Container>
-          <Container maxW={{ base: 'full', lg: '80' }} p="4">
+          </Box>
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
             <Heading fontSize="lg" mb="4">
-              Fast and Intuitive
+              Fast and Intuitive ⚡
             </Heading>
             <Text fontWeight="medium">
               Say goodbye to pastebin. Enjoy something built with latest
               technology and UX in mind.
             </Text>
-          </Container>
-        </Flex>
+          </Box>
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
+            <Heading fontSize="lg" mb="4">
+              Targeted 🎯
+            </Heading>
+            <Text fontWeight="medium">
+              Optimized for copy pastes, quick notes and todo lists.
+            </Text>
+          </Box>
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
+            <Heading fontSize="lg" mb="4">
+              Cross Platform 📱
+            </Heading>
+            <Text fontWeight="medium">
+              Copy from iPhone and paste on PC? Sure! Just a few taps.
+            </Text>
+          </Box>
+          <Box maxW={{ base: 'full', lg: '80' }} h="40" p="4">
+            <Heading fontSize="lg" mb="4">
+              Made with 💖
+            </Heading>
+            <Text fontWeight="medium">
+              Meanwhile, the whole app is completely free and open source.
+            </Text>
+          </Box>
+        </SimpleGrid>
       </Flex>
+
       <Flex
         as="footer"
         w="full"
