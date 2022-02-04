@@ -5,7 +5,6 @@ import {
   useColorMode,
   chakra,
   Button,
-  useBreakpointValue,
   Box,
   SimpleGrid
 } from '@chakra-ui/react';
@@ -20,7 +19,6 @@ import Logo from '../public/logo.png';
 const Home: NextPage = () => {
   const router = useRouter();
   const { colorMode } = useColorMode();
-  const buttonSize = useBreakpointValue({ base: 'md', lg: 'lg' });
 
   return (
     <>
@@ -71,9 +69,9 @@ const Home: NextPage = () => {
         </Text>
 
         <Button
-          size={buttonSize}
+          size="lg"
           rightIcon={<IoMdArrowRoundForward />}
-          colorScheme="teal"
+          colorScheme="blue"
           mt={['6', '8', '12']}
           onClick={() => router.push('/login')}
         >
