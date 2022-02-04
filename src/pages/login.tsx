@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Logo from '../public/logo.png';
+import type { PageWithLayout } from '../types';
 
 const schema = z.object({
   email: z
@@ -23,7 +24,7 @@ const schema = z.object({
     .email({ message: 'Please enter a valid email' })
 });
 
-function Login() {
+const Login: PageWithLayout = () => {
   const {
     handleSubmit,
     register,
@@ -32,7 +33,7 @@ function Login() {
 
   return (
     <>
-      <Center w="full" flex={1}>
+      <Center w="full" flex={1} p="12">
         <chakra.form
           w="full"
           maxW="96"
@@ -70,6 +71,8 @@ function Login() {
       </Center>
     </>
   );
-}
+};
+
+Login.withFooter = true;
 
 export default Login;

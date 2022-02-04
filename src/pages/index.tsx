@@ -10,13 +10,13 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
-import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 
 import Logo from '../public/logo.png';
+import type { PageWithLayout } from '../types';
 
-const Home: NextPage = () => {
+const Home: PageWithLayout = () => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
@@ -132,21 +132,10 @@ const Home: NextPage = () => {
           </Box>
         </SimpleGrid>
       </Flex>
-
-      <Flex
-        as="footer"
-        w="full"
-        minH="16"
-        shrink={0}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Text textColor="gray.400" fontWeight="medium">
-          2022 Zhijie Zhu
-        </Text>
-      </Flex>
     </>
   );
 };
+
+Home.withFooter = true;
 
 export default Home;

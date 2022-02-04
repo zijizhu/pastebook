@@ -1,14 +1,20 @@
-import { ChakraProvider } from '@chakra-ui/react';
 import { SWRConfig } from 'swr';
-import { myTheme } from '../theme';
-import RootLayout from '../components/RootLayout';
 import type { AppProps } from 'next/app';
+import { ChakraProvider } from '@chakra-ui/react';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import { myTheme } from '../theme';
+import type { PageWithLayout } from '../types';
+import RootLayout from '../components/RootLayout';
+
+type AppPropsWithLayout = AppProps & {
+  Component: PageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ChakraProvider resetCSS theme={myTheme}>
       <SWRConfig>
-        <RootLayout>
+        <RootLayout showFooter={!!Component.withFooter}>
           <Component {...pageProps} />
         </RootLayout>
       </SWRConfig>
