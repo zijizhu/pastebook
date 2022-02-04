@@ -9,12 +9,13 @@ import {
   FormControl,
   FormErrorMessage
 } from '@chakra-ui/react';
+import Head from 'next/head';
 import Image from 'next/image';
 import { MdEmail } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import Logo from '../public/logo.png';
+import Logo from '../../public/logo.png';
 import type { PageWithLayout } from '../types';
 
 const schema = z.object({
@@ -33,6 +34,9 @@ const Login: PageWithLayout = () => {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Center w="full" flex={1} p="12">
         <chakra.form
           w="full"

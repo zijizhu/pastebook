@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { BsGithub } from 'react-icons/bs';
 import { MoonIcon } from '@chakra-ui/icons';
 
-import Logo from '../public/logo.png';
+import Logo from '../../public/logo.png';
 
 function TopBar() {
   const router = useRouter();

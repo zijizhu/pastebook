@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 
-import Logo from '../public/logo.png';
+import Logo from '../../public/logo.png';
 import type { PageWithLayout } from '../types';
 
 const Home: PageWithLayout = () => {

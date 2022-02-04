@@ -10,8 +10,6 @@ function RootLayout({
   showFooter: boolean;
   children: ReactNode;
 }) {
-  console.log('rendered');
-
   return (
     <Flex minH="100vh" direction="column">
       <TopBar />
