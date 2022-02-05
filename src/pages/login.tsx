@@ -6,8 +6,10 @@ import {
   Button,
   chakra,
   Heading,
+  useToast,
   FormControl,
-  FormErrorMessage
+  FormErrorMessage,
+  Text
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -15,6 +17,9 @@ import { MdEmail } from 'react-icons/md';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useCountDown } from '../hooks';
+import { supabase } from '../supabase';
+import { clientUrl } from '../constants';
 import Logo from '../../public/logo.png';
 import type { PageWithLayout } from '../types';
 
@@ -29,8 +34,24 @@ const Login: PageWithLayout = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting, isSubmitted, isSubmitSuccessful }
   } = useForm<{ email: string }>({ resolver: zodResolver(schema) });
+
+  const { value, start } = useCountDown(5);
+
+  const onSubmit = async ({ email }: { email: string }) => {
+    try {
+      const { error } = await supabase.auth.signIn(
+        { email },
+        { redirectTo: `${clientUrl}/app` }
+      );
+      if (error) throw error;
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
+  console.log('rendered');
 
   return (
     <>
@@ -44,7 +65,7 @@ const Login: PageWithLayout = () => {
           display="flex"
           alignItems="center"
           flexDirection="column"
-          onSubmit={handleSubmit((val) => console.log('email', val.email))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Image src={Logo} alt="logo" width={90} height={90} />
           <Heading fontSize="xl" mt="6">
@@ -63,14 +84,20 @@ const Login: PageWithLayout = () => {
           </FormControl>
           <Button
             mt={4}
+            disabled={true}
             isFullWidth
             type="submit"
             colorScheme="blue"
             isLoading={isSubmitting}
+            loadingText="Sending link..."
             rightIcon={<Icon as={MdEmail} />}
           >
             Get Login Link
           </Button>
+          <Button mt={4} isFullWidth colorScheme="blue" onClick={() => start()}>
+            Start Timer
+          </Button>
+          <Text> {value} </Text>
         </chakra.form>
       </Center>
     </>
