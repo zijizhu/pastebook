@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import { myTheme } from '../theme';
 import type { PageWithLayout } from '../types';
+import AuthGuard from '../components/AuthGuard';
 import RootLayout from '../components/RootLayout';
 
 type AppPropsWithLayout = AppProps & {
@@ -15,14 +16,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ChakraProvider resetCSS theme={myTheme}>
       <SWRConfig>
-        <RootLayout showFooter={!!Component.withFooter}>
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-          </Head>
-          <Component {...pageProps} />
+        <RootLayout>
+          <AuthGuard pageRequiresAuth={Component.requiresAuth}>
+            <Component {...pageProps} />
+          </AuthGuard>
         </RootLayout>
       </SWRConfig>
     </ChakraProvider>

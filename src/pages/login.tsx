@@ -1,6 +1,7 @@
 import * as z from 'zod';
 import {
   Icon,
+  Text,
   Input,
   Center,
   Button,
@@ -8,8 +9,7 @@ import {
   Heading,
   useToast,
   FormControl,
-  FormErrorMessage,
-  Text
+  FormErrorMessage
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -31,27 +31,43 @@ const schema = z.object({
 });
 
 const Login: PageWithLayout = () => {
+  const toast = useToast();
+  const { value, start: startCountDown, started } = useCountDown(5);
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting, isSubmitted, isSubmitSuccessful }
+    formState: { errors, isSubmitting }
   } = useForm<{ email: string }>({ resolver: zodResolver(schema) });
-
-  const { value, start } = useCountDown(5);
 
   const onSubmit = async ({ email }: { email: string }) => {
     try {
       const { error } = await supabase.auth.signIn(
         { email },
-        { redirectTo: `${clientUrl}/app` }
+        { redirectTo: `${clientUrl}/redirect` }
       );
       if (error) throw error;
+      toast({
+        title: 'Link sent',
+        description: 'Please check your inbox',
+        status: 'success',
+        position: 'top',
+        duration: 5000,
+        isClosable: true
+      });
     } catch (error) {
       console.warn(error);
+      toast({
+        title: 'Failed to send link',
+        description: 'Please try again later',
+        status: 'error',
+        position: 'top',
+        duration: 5000,
+        isClosable: true
+      });
+    } finally {
+      startCountDown();
     }
   };
-
-  console.log('rendered');
 
   return (
     <>
@@ -84,26 +100,20 @@ const Login: PageWithLayout = () => {
           </FormControl>
           <Button
             mt={4}
-            disabled={true}
             isFullWidth
             type="submit"
             colorScheme="blue"
             isLoading={isSubmitting}
             loadingText="Sending link..."
             rightIcon={<Icon as={MdEmail} />}
+            disabled={started || isSubmitting}
           >
-            Get Login Link
+            {started ? `Resend After ${value}s` : 'Get Login Link'}
           </Button>
-          <Button mt={4} isFullWidth colorScheme="blue" onClick={() => start()}>
-            Start Timer
-          </Button>
-          <Text> {value} </Text>
         </chakra.form>
       </Center>
     </>
   );
 };
-
-Login.withFooter = true;
 
 export default Login;

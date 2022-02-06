@@ -30,9 +30,10 @@ function TopBar() {
         alignItems="center"
       >
         <HStack spacing="2.5">
-          {router.pathname !== '/' && router.pathname !== '/login' && (
+          {/* {router.pathname !== '/' && router.pathname !== '/login' && (
             <Image src={Logo} alt="logo" width={35} height={35} />
-          )}
+          )} */}
+          <Image src={Logo} alt="logo" width={35} height={35} />
 
           <Link href="/" passHref>
             <chakra.a
