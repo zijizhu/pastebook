@@ -52,6 +52,7 @@ const AppLayout: FC = ({ children }) => {
             leftIcon={<Icon as={BsFillFileTextFill} />}
             colorScheme="blue"
             isFullWidth
+            onClick={() => router.push('/app/create')}
           >
             New Item
           </Button>
