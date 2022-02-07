@@ -1,7 +1,6 @@
 import * as z from 'zod';
 import {
   Icon,
-  Text,
   Input,
   Center,
   Button,
@@ -115,5 +114,7 @@ const Login: PageWithLayout = () => {
     </>
   );
 };
+
+Login.getLayout = (page) => page;
 
 export default Login;

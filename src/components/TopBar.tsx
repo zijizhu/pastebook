@@ -10,14 +10,12 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaSun } from 'react-icons/fa';
-import { useRouter } from 'next/router';
 import { BsGithub } from 'react-icons/bs';
 import { MoonIcon } from '@chakra-ui/icons';
 
 import Logo from '../../public/logo.png';
 
 function TopBar() {
-  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -30,9 +28,6 @@ function TopBar() {
         alignItems="center"
       >
         <HStack spacing="2.5">
-          {/* {router.pathname !== '/' && router.pathname !== '/login' && (
-            <Image src={Logo} alt="logo" width={35} height={35} />
-          )} */}
           <Image src={Logo} alt="logo" width={35} height={35} />
 
           <Link href="/" passHref>

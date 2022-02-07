@@ -136,6 +136,6 @@ const Home: PageWithLayout = () => {
   );
 };
 
-Home.withFooter = true;
+Home.getLayout = (page) => page;
 
 export default Home;

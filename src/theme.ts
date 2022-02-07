@@ -23,6 +23,10 @@ const semanticTokens = {
     text: {
       default: '#213547',
       _dark: '#ebeced'
+    },
+    menuHover: {
+      default: 'gray.100',
+      _dark: 'blue.900'
     }
   }
 };
