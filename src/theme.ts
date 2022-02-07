@@ -26,7 +26,11 @@ const semanticTokens = {
     },
     menuHover: {
       default: 'gray.100',
-      _dark: 'blue.900'
+      _dark: 'gray.700'
+    },
+    menuActive: {
+      default: 'gray.200',
+      _dark: 'gray.600'
     }
   }
 };

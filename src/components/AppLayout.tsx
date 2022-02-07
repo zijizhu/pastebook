@@ -1,19 +1,20 @@
-import { FC } from 'react';
 import Link from 'next/link';
+import type { FC } from 'react';
 import { IconType } from 'react-icons';
+import { useRouter } from 'next/router';
 import { HiSearch } from 'react-icons/hi';
 import { AiFillTags } from 'react-icons/ai';
 import { BsStarFill } from 'react-icons/bs';
 import { IoMdCalendar } from 'react-icons/io';
-import { RiPencilFill } from 'react-icons/ri';
 import { BsBoxSeam, BsFillFileTextFill } from 'react-icons/bs';
 import { Flex, chakra, Text, Icon, Button, VStack } from '@chakra-ui/react';
 
-const MenuLink: FC<{ icon: IconType; url: string; text: string }> = ({
-  icon,
-  url,
-  text
-}) => {
+const MenuLink: FC<{
+  icon: IconType;
+  url: string;
+  text: string;
+  isCurrent: boolean;
+}> = ({ url, icon, text, isCurrent }) => {
   return (
     <Link href={url} passHref>
       <chakra.a
@@ -24,8 +25,10 @@ const MenuLink: FC<{ icon: IconType; url: string; text: string }> = ({
         fontWeight="semibold"
         transitionDuration="200ms"
         _hover={{ bgColor: 'menuHover' }}
+        _active={{ bgColor: 'menuActive' }}
+        color={isCurrent ? 'blue.500' : 'text'}
       >
-        <Icon fill="blue.400" as={icon} mr="2" />
+        <Icon fill="blue.400" as={icon} mr="3" />
         {text}
       </chakra.a>
     </Link>
@@ -33,6 +36,8 @@ const MenuLink: FC<{ icon: IconType; url: string; text: string }> = ({
 };
 
 const AppLayout: FC = ({ children }) => {
+  const router = useRouter();
+
   return (
     <Flex flex={1} w="6xl" maxW="full" mx="auto">
       <Flex
@@ -58,10 +63,30 @@ const AppLayout: FC = ({ children }) => {
           YOUR PASTES
         </Text>
 
-        <MenuLink url="/app" icon={BsStarFill} text="Quick Access" />
-        <MenuLink url="/app" icon={BsBoxSeam} text="All Items" />
-        <MenuLink url="/app" icon={IoMdCalendar} text="Calendar" />
-        <MenuLink url="/app" icon={AiFillTags} text="Tags" />
+        <MenuLink
+          isCurrent={router.pathname === '/app'}
+          url="/app"
+          icon={BsStarFill}
+          text="Quick Access"
+        />
+        <MenuLink
+          isCurrent={router.pathname === '/app/all'}
+          url="/app/all"
+          icon={BsBoxSeam}
+          text="All Items"
+        />
+        <MenuLink
+          isCurrent={router.pathname === '/app/calendar'}
+          url="/app/calendar"
+          icon={IoMdCalendar}
+          text="Calendar"
+        />
+        <MenuLink
+          isCurrent={router.pathname === '/app/tags'}
+          url="/app/tags"
+          icon={AiFillTags}
+          text="Tags"
+        />
       </Flex>
       {children}
     </Flex>
