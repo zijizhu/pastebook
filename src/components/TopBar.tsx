@@ -9,15 +9,19 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useContext } from 'react';
 import { FaSun } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
 import { MoonIcon } from '@chakra-ui/icons';
 
+import MenuDrawer from './MenuDrawer';
+import { useIsMobile } from '../hooks';
 import Logo from '../../public/logo.png';
+import { AuthContext } from '../contexts/AuthGuard';
 
 function TopBar() {
-  const router = useRouter();
+  const { isMobile } = useIsMobile();
+  const { session } = useContext(AuthContext);
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -32,40 +36,41 @@ function TopBar() {
       justifyContent="center"
     >
       <Flex
-        w="6xl"
         px="4"
+        w="6xl"
         maxWidth="full"
-        justifyContent="space-between"
         alignItems="center"
+        justifyContent="space-between"
       >
-        <HStack spacing="2.5">
-          <Image src={Logo} alt="logo" width={35} height={35} />
-
-          <Link href={router.pathname.includes('/app') ? '/app' : '/'} passHref>
-            <chakra.a
-              bgClip="text"
-              bgGradient={
-                colorMode === 'light'
-                  ? 'linear(to-r, teal.500, blue.500)'
-                  : 'linear(to-r, teal.300, blue.300)'
-              }
-              fontSize="2xl"
-              userSelect="none"
-              fontWeight="bold"
-            >
-              Pastebook
-            </chakra.a>
-          </Link>
-        </HStack>
+        <Link href={session ? '/app' : '/'} passHref>
+          <chakra.a display="flex" alignItems="center">
+            <Image src={Logo} alt="logo" width={35} height={35} />
+            {!isMobile && (
+              <chakra.span
+                ml="3"
+                bgClip="text"
+                fontSize="2xl"
+                fontWeight="bold"
+                bgGradient={
+                  colorMode === 'light'
+                    ? 'linear(to-r, teal.500, blue.500)'
+                    : 'linear(to-r, teal.300, blue.300)'
+                }
+              >
+                Pastebook
+              </chakra.span>
+            )}
+          </chakra.a>
+        </Link>
 
         <HStack spacing="2">
           <Tooltip mt="4" label="github">
             <IconButton
               variant="ghost"
-              colorScheme="gray"
               color="gray.400"
-              onClick={toggleColorMode}
+              colorScheme="gray"
               aria-label="github link"
+              onClick={toggleColorMode}
               icon={<Icon w={5} h={5} as={BsGithub} />}
             />
           </Tooltip>
@@ -77,8 +82,8 @@ function TopBar() {
             <IconButton
               p="0"
               variant="ghost"
-              colorScheme="gray"
               color="gray.400"
+              colorScheme="gray"
               onClick={toggleColorMode}
               aria-label="toggle dark mode"
               icon={
@@ -90,6 +95,7 @@ function TopBar() {
               }
             />
           </Tooltip>
+          {session && isMobile && <MenuDrawer />}
         </HStack>
       </Flex>
     </Flex>

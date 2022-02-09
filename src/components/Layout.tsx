@@ -3,6 +3,7 @@ import { Flex, Text, Center, Spinner } from '@chakra-ui/react';
 
 import TopBar from './TopBar';
 import MenuBar from './MenuBar';
+import { useIsMobile } from '../hooks';
 import { AuthContext } from '../contexts/AuthGuard';
 
 const Loading = () => (
@@ -12,6 +13,7 @@ const Loading = () => (
 );
 
 const Layout: FC = ({ children }) => {
+  const { isMobile } = useIsMobile();
   const { isLoaded, session } = useContext(AuthContext);
 
   return (
@@ -19,16 +21,10 @@ const Layout: FC = ({ children }) => {
       <TopBar />
       <Flex pt="16" as="main" flex={1} direction="column">
         {isLoaded ? (
-          <>
-            {session ? (
-              <>
-                <MenuBar />
-                {children}
-              </>
-            ) : (
-              <>{children}</>
-            )}
-          </>
+          <Flex flex={1} w="6xl" maxW="full" mx="auto">
+            {session && !isMobile && <MenuBar />}
+            {children}
+          </Flex>
         ) : (
           <Loading />
         )}

@@ -14,7 +14,8 @@ const MenuLink: FC<{
   url: string;
   text: string;
   isCurrent: boolean;
-}> = ({ url, icon, text, isCurrent }) => {
+  onClick?: () => void;
+}> = ({ url, icon, text, isCurrent, onClick }) => {
   return (
     <Link href={url} passHref>
       <chakra.a
@@ -27,6 +28,7 @@ const MenuLink: FC<{
         _hover={{ bgColor: 'menuHover' }}
         _active={{ bgColor: 'menuActive' }}
         color={isCurrent ? 'blue.500' : 'text'}
+        onClick={() => onClick && onClick()}
       >
         <Icon fill="blue.400" as={icon} mr="3" />
         {text}
@@ -35,60 +37,69 @@ const MenuLink: FC<{
   );
 };
 
-const MenuBar = () => {
+const MenuBar: FC<{ isFullWidth?: boolean; onBtnClick?: () => void }> = ({
+  isFullWidth,
+  onBtnClick
+}) => {
   const router = useRouter();
 
   return (
-    <Flex flex={1} w="6xl" maxW="full" mx="auto">
-      <Flex
-        p="4"
-        w="56"
-        shrink={0}
-        direction="column"
-        display={{ base: 'none', md: 'flex' }}
-      >
-        <VStack spacing="3" mb="2">
-          <Button
-            leftIcon={<Icon as={BsFillFileTextFill} />}
-            colorScheme="blue"
-            isFullWidth
-            onClick={() => router.push('/app/create')}
-          >
-            New Item
-          </Button>
-          <Button leftIcon={<Icon as={HiSearch} />} isFullWidth>
-            Search
-          </Button>
-        </VStack>
-        <Text userSelect="none" size="sm" fontWeight="bold" my="2">
-          YOUR PASTES
-        </Text>
+    <Flex p="4" shrink={0} direction="column" w={isFullWidth ? 'full' : '56'}>
+      <VStack spacing="3" mb="2">
+        <Button
+          leftIcon={<Icon as={BsFillFileTextFill} />}
+          colorScheme="blue"
+          isFullWidth
+          onClick={() => {
+            router.push('/app/create');
+            if (onBtnClick) onBtnClick();
+          }}
+        >
+          New Item
+        </Button>
+        <Button
+          leftIcon={<Icon as={HiSearch} />}
+          isFullWidth
+          onClick={() => {
+            router.push('/app/create');
+            if (onBtnClick) onBtnClick();
+          }}
+        >
+          Search
+        </Button>
+      </VStack>
+      <Text userSelect="none" size="sm" fontWeight="bold" my="2">
+        YOUR PASTES
+      </Text>
 
-        <MenuLink
-          isCurrent={router.pathname === '/app'}
-          url="/app"
-          icon={BsStarFill}
-          text="Quick Access"
-        />
-        <MenuLink
-          isCurrent={router.pathname === '/app/all'}
-          url="/app/all"
-          icon={BsBoxSeam}
-          text="All Items"
-        />
-        <MenuLink
-          isCurrent={router.pathname === '/app/calendar'}
-          url="/app/calendar"
-          icon={IoMdCalendar}
-          text="Calendar"
-        />
-        <MenuLink
-          isCurrent={router.pathname === '/app/tags'}
-          url="/app/tags"
-          icon={AiFillTags}
-          text="Tags"
-        />
-      </Flex>
+      <MenuLink
+        isCurrent={router.pathname === '/app'}
+        url="/app"
+        icon={BsStarFill}
+        text="Quick Access"
+        onClick={onBtnClick}
+      />
+      <MenuLink
+        isCurrent={router.pathname === '/app/all'}
+        url="/app/all"
+        icon={BsBoxSeam}
+        text="All Items"
+        onClick={onBtnClick}
+      />
+      <MenuLink
+        isCurrent={router.pathname === '/app/calendar'}
+        url="/app/calendar"
+        icon={IoMdCalendar}
+        text="Calendar"
+        onClick={onBtnClick}
+      />
+      <MenuLink
+        isCurrent={router.pathname === '/app/tags'}
+        url="/app/tags"
+        icon={AiFillTags}
+        text="Tags"
+        onClick={onBtnClick}
+      />
     </Flex>
   );
 };
