@@ -1,12 +1,11 @@
-import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { myTheme } from '../theme';
-import type { PageWithLayout } from '../types';
 import Layout from '../components/Layout';
 import AuthGuard from '../contexts/AuthGuard';
+import type { PageWithLayout } from '../types';
 
 type AppPropsWithLayout = AppProps & {
   Component: PageWithLayout;

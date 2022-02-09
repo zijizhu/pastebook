@@ -1,7 +1,6 @@
 import {
   Icon,
   Flex,
-  Input,
   chakra,
   HStack,
   Tooltip,
@@ -57,7 +56,6 @@ function TopBar() {
               Pastebook
             </chakra.a>
           </Link>
-          <Input />
         </HStack>
 
         <HStack spacing="2">

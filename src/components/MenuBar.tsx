@@ -7,15 +7,7 @@ import { AiFillTags } from 'react-icons/ai';
 import { BsStarFill } from 'react-icons/bs';
 import { IoMdCalendar } from 'react-icons/io';
 import { BsBoxSeam, BsFillFileTextFill } from 'react-icons/bs';
-import {
-  Flex,
-  Text,
-  Icon,
-  chakra,
-  Button,
-  VStack,
-  Input
-} from '@chakra-ui/react';
+import { Flex, Text, Icon, chakra, Button, VStack } from '@chakra-ui/react';
 
 const MenuLink: FC<{
   icon: IconType;
@@ -96,7 +88,6 @@ const MenuBar = () => {
           icon={AiFillTags}
           text="Tags"
         />
-        <Input />
       </Flex>
     </Flex>
   );

@@ -28,10 +28,6 @@ const AuthGuard: FC<{ pageRequiresAuth?: boolean }> = ({
     if (!updatedSession && pageRequiresAuth) Router.replace('/');
   }, [pageRequiresAuth]);
 
-  useEffect(() => {
-    console.log('triggered');
-  });
-
   return (
     <AuthContext.Provider value={{ session, isLoaded }}>
       {children}
