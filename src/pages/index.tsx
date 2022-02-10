@@ -136,6 +136,4 @@ const Home: PageWithLayout = () => {
   );
 };
 
-Home.getLayout = (page) => page;
-
 export default Home;

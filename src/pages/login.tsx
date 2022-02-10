@@ -115,6 +115,4 @@ const Login: PageWithLayout = () => {
   );
 };
 
-Login.getLayout = (page) => page;
-
 export default Login;
